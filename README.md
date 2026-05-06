@@ -11,7 +11,7 @@
 
 
 ### ***Description***
-#### Animal Care Center is a web site where clinics can list their products and services for the users, and the users can adopt animals, make orders to buy the products from the clinics, and set an appointments for their pets in a selected clinic.
+#### Animal Care Center is a web site where clinics can list their products, services, and animals for adoption for the users, and the users can adopt animals, make orders to buy the products from the clinics, and set an appointments for their pets in a selected clinic.
 ***
 
 ### ***Technologies Used***
