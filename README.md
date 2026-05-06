@@ -7,7 +7,7 @@
 ### Created By: Masooma Ebrahim
 
 [GitHub](https://github.com/masooma99)
-[LinkedIn]()
+[LinkedIn](https://www.linkedin.com/in/masoomaebrahim99/)
 
 
 ### ***Description***
