@@ -1,63 +1,43 @@
 
 
-# Project 3 : WASEL
+# Project 3 : Animal Care Center
 
-## Date: 16/4/2026
+## Date: 6/5/2026
 
-### Created By: Fathy Soliman - Yusuf AlSheikh - Masooma Ebrahim - Zainab Salman
+### Created By: Masooma Ebrahim
 
-[GitHub](https://github.com/fat7y-1)
-[LinkedIn]()
-***
-[Github](https://github.com/YUSUF-ALSHIEKH)
-[Linkedin]()
-***
 [GitHub](https://github.com/masooma99)
 [LinkedIn]()
-***
-[Github](https://github.com/ZELDA3)
-[Linkedin]()
-***
 
 
 ### ***Description***
-#### WASEL is a delivery application for ordering food, there are three types of users: an admin, who manages the listings of partner restaurants; an owner: who creates and edits restaurant profiles; and a client: who orders food and based on their selections, clients can update, delete, or track their order status, as well as view their order history.
+#### Animal Care Center is a web site where clinics can list their products and services for the users, and the users can adopt animals, make orders to buy the products from the clinics, and set an appointments for their pet in a selected clinic.
 ***
 
 ### ***Technologies Used***
-* Node
-* Express
-* React
-* MongoDB
-* Mongoose
-* Vite
-* JWT
-* Axios
+* python
+* html
+* js
 ***
 
 ### ***Getting Started***
 
 #####
 
-##### A Trello board was used to keep track of development progress and can be viewed [https://trello.com/b/tWR76XAc/wasel]
+##### A Trello board was used to keep track of development progress and can be viewed [https://trello.com/b/Ptno9RyB/animal-care-center]
 ***
 
 ### WireFrame
+Intro page
+![Image](./images/wf_intro_page.jpg)
 Home page
-![Image](./images/Screenshot_20260416_112704_Samsung%20Notes.jpg)
-Admin page & Menu page
-![Image](./images/Screenshot_20260416_143026_Samsung%20Notes.jpg)
-Cart Page
-![Image](./images/Screenshot_20260416_114301_Samsung%20Notes.jpg)
-Order Page
-![Image](./images/Screenshot_20260416_141515_Samsung%20Notes.jpg)
+![Image](./images/wf_homepage.jpg)
+Profile page
+![Image](./images/wf_profile_page.jpg)
 
 ### ERD
-![Image](./images/Blank%20board%20(2).png)
+![Image](./images/erdiagram.jpg)
 
-
-##### Hierarchy Diagram
-![Image](./images/wasel1.drawio.png)
 
 
 ### ***Future Updates***
