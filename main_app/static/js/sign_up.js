@@ -1,5 +1,6 @@
 console.log("it works......")
 const myForm = document.getElementById("signup_id")
+console.log()
 // const formValidationButton = document.getElementById("formValidationButton")
 myForm.confirmPassword.addEventListener("change", () => {
   console.log(myForm.confirmPassword.value)
@@ -12,7 +13,7 @@ myForm.confirmPassword.addEventListener("change", () => {
 })
 
 myForm.button.addEventListener("click", () => {
-  event.preventDefault()
+  // event.preventDefault()
   console.log("button clicked")
 
   // console.log(myForm.password.value)

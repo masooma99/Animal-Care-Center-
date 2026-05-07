@@ -11,8 +11,9 @@
   <nav>
     {% if user.is_authenticated %}
       <p>Welcome {{user.username}}</p>
+      <a href="/auth/signout/">Sign Out</a>
       {% else %}
-      <p>Welcome guest please sign in</p>
+      <p>Welcome guest please <a href="/auth/login/">sign in</a> or <a href="/auth/sign-up">Register</a></p>
     {% endif %}
   </nav>
   {% block content %}{% endblock content %}

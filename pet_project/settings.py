@@ -126,6 +126,7 @@ STATIC_URL = "static/"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "/"  # after successful login
 LOGOUT_REDIRECT_URL = "login"  # after logout
+AUTH_USER_MODEL = "main_app.CustomUser"
 
 
 # AUTH_USER_MODEL = "main_app.CustomUser"

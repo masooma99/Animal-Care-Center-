@@ -1,15 +1,17 @@
 from django import forms
-
-# from .models import User
-
-
-# class SignUpUserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ["name", "age", "image", "clinic", "email", "password"]
+from django.contrib.auth.forms import UserCreationForm
+from .models import CustomUser
 
 
-# class SignInUserForm(forms.ModelForm):
-#     class Meta:
-#         model = User
-#         fields = ["email", "password"]
+class CustomUserCreationForm(UserCreationForm):
+    email = forms.EmailField(required=True)
+    image = forms.CharField()  # (max_length=255)
+    clinic = forms.BooleanField()  # (default=False)
+
+    class Meta(UserCreationForm.Meta):
+        model = CustomUser
+        fields = UserCreationForm.Meta.fields + (
+            "email",
+            "image",
+            "clinic",
+        )
