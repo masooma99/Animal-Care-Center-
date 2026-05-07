@@ -7,6 +7,14 @@
   {% block head %}{% endblock head %}
 </head>
 <body>
+
+  <nav>
+    {% if user.is_authenticated %}
+      <p>Welcome {{user.username}}</p>
+      {% else %}
+      <p>Welcome guest please sign in</p>
+    {% endif %}
+  </nav>
   {% block content %}{% endblock content %}
 </body>
 </html>
