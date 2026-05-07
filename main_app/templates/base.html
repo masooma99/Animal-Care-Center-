@@ -7,15 +7,17 @@
   {% block head %}{% endblock head %}
 </head>
 <body>
+<header>
+  <a href="/users/">Home Page</a> | <a href="/users/{{user.id}}/">Profile</a> | <a href="/auth/logout/">Sign Out</a>
 
-  <nav>
+  {% comment %} <nav>
     {% if user.is_authenticated %}
       <p>Welcome {{user.username}}</p>
-      <a href="/auth/signout/">Sign Out</a>
       {% else %}
       <p>Welcome guest please <a href="/auth/login/">sign in</a> or <a href="/auth/sign-up">Register</a></p>
     {% endif %}
-  </nav>
+  </nav> {% endcomment %}
+  </header>
   {% block content %}{% endblock content %}
 </body>
 </html>

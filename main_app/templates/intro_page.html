@@ -1,5 +1,20 @@
 {% extends "base.html" %}
-{% block head %}{% endblock head %}
+{% block head %}
+<style>
+  body{
+    background-color: rgb(245, 216, 220);
+  }
+  #intro_message{
+    justify-content:center;
+    text-align:center;
+  }
+</style>
+{% endblock head %}
 {% block content %}
-<h1>Intro Page</h1>
+<div id='intro_message'>
+<h1>Welcome {% if user.is_authenticated %}{{user.username}}
+    {% endif %} To Our Animal</h1>
+<br>
+<h1>Care Center App</h1>
+</div>
 {% endblock content %}

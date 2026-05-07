@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+  body{
+    background-color: rgb(245, 216, 220);
+  }
+  #user_profile_details img{
+    width: 150px;
+  }
+</style>
+{% endblock head %}
+{% block content %}
+<div id='user_profile_details'>
+  <img src="{{user_details.image}}" alt="User Profile Image">
+<h1>{{user_details.username}}{% if user_details.clinic %}
+clinic
+{% endif %}</h1>
+</div>
+<hr>
+{% endblock content %}

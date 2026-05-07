@@ -23,9 +23,25 @@ def intro_page(request):
 
 from django.contrib.auth.forms import UserCreationForm
 from .forms import CustomUserCreationForm
+from .models import CustomUser
 
 
 class SignUpView(CreateView):  # (CreateView):
     template_name = "registration/sign-up.html"
     form_class = CustomUserCreationForm
     success_url = "/auth/login"  # or your home
+
+
+# -------------------------------------  profile page  --------------------------------------------
+class UserDetailView(DetailView):
+    model = CustomUser
+    template_name = "user/user_detail.html"
+    context_object_name = "user_details"
+    pk_url_kwarg = "id"
+
+
+class UserListView(ListView):
+    model = CustomUser
+    template_name = "user/user_list.html"
+    context_object_name = "users"
+    success_url = "/users/"
