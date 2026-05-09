@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+  body{
+    background-color: rgb(245, 216, 220);
+  }
+  #user_profile_details img{
+    width: 150px;
+  }
+  #profile_chose_block{
+    display: flex;
+  justify-content: space-around;
+  }
+</style>
+{% endblock head %}
+{% block content %}
+<div id='user_profile_details'>
+  <img src="{{user_details.image}}" alt="User Profile Image">
+<h1>{{user_details.username}}{% if user_details.clinic %}
+clinic
+{% endif %}</h1>
+</div>
+<hr>
+<br>
+<br>
+<div id='profile_chose_block'>
+  {% if user_details.clinic %}
+  <form action="" method ='get'>
+    {% csrf_token %}
+    <button>
+      Animal
+    </button>
+  </form>
+  <form action="" method ='get'>
+    {% csrf_token %}
+    <button>
+      Appointments
+    </button>
+  </form>
+  {% comment %} <form action="/users/{{user_details.id}}/products/create" method ='post'> {% endcomment %}
+  <form action="/users/{{user_details.id}}/product/create/" method ='post'>
+    {% csrf_token %}
+    <button>
+      Products
+    </button>
+  </form>
+  {% else %}
+  <form action="" method ='get'>
+    {% csrf_token %}
+    <button>
+      Pets
+    </button>
+  </form>
+  <form action="" method ='get'>
+    {% csrf_token %}
+    <button>
+      Appointments
+    </button>
+  </form>
+  <form action="" method ='get'>
+    {% csrf_token %}
+    <button>
+      Orders
+    </button>
+  </form>
+{% endif %}
+</div>
+<br>
+<br>
+<hr>
+{% block profile_selected_block %}{% endblock profile_selected_block %}
+{% comment %} ---------------  Products  -------------- {% endcomment %}
+  <div id='user_detail_page products'>
+    <form method="post" f"action='/users/{{ user_details.id }}/'">
+    {% comment %} <form method="post"> {% endcomment %}
+    {% csrf_token %}
+    {{form.as_p}}
+    <button>Create</button>
+</form>
+
+  <h1>Clinic Products List</h1>
+  {% for product in user_details.clinic_products.all %}
+    <h3>{{product.product_name}}</h3>
+  {% endfor %}
+</div>
+
+
+
+{% comment %} ---------------  Animals  -------------- {% endcomment %}
+<div id='user_detail_page animals'></div>
+
+{% comment %} ---------------  Appointments  -------------- {% endcomment %}
+<div id='user_detail_page appointments'></div>
+{% endblock content %}

@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser
+from .models import CustomUser, Animal, Products
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -15,3 +15,15 @@ class CustomUserCreationForm(UserCreationForm):
             "image",
             "clinic",
         )
+
+
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Products
+        fields = ["product_name", "description", "image", "price", "clinic"]
+
+
+class AnimalForm(forms.ModelForm):
+    class Meta:
+        model = Animal
+        fields = ["animal_name", "age", "image", "type"]

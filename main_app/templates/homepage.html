@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block content %}
+{% for one_user in users %}
+{% if one_user.clinic %}
+<h1>{{one_user.username}}</h1>{% endif %}
+
+{% endfor %}
+{% endblock content %}
