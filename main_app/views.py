@@ -59,58 +59,101 @@ class ProductListView(ListView):
     template_name = "clinic_products_list.html"
     context_object_name = "products"
     success_url = "/users/{id}/product/"
-    pk_url_kwarg = id
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.kwargs.get("id"))
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
 
 
-# class ProductCreateView(CreateView):
-#     model = Products
-#     form_class = ProductForm
-#     success_url = "/product/create/"
-#     template_name = "user/clinic_form/create_product.html"
-
-
-# def create_product(request, id):
-#     print(request.method)
-#     if request.method == "POST":
-#         form = ProductForm(request.POST)
-#         if form.is_valid():
-#             product = form.save()  # (commit=False)
-#             # product.clinic = id
-#             # product.save()
-#             # return redirect("/")
-#         form = ProductForm()
-#         return render(
-#             request, "user/clinic_profile/clinic_product_list.html", {"product": product}
-#         )
-# Function-based view approach
 def create_product(request, id):
-    # print(type(request.user.id))
-    user_id = str(request.user.id)
-    print(user_id)
-    print(type(user_id))
-    # print(request.user)
     if request.method == "POST":
         form = ProductForm(request.POST)
         if form.is_valid():
             product = form.save(commit=False)  # In-memory creation
-            product.clint = id  # Set user
+            product.clinic = request.user  # Set user
             product.save()  # Commit
             # it does not do any of there thing but it does create the product
-            return render(
-                request,
-                "user_detail.html",
-                {"product": product},
-            )
+            # return render(
+            #     request,
+            #     "user_detail.html",
+            #     {"product": product},
+            # )
+            return redirect(f"/users/{request.user.id}")
     form = ProductForm()
-    return redirect("/users/{user_id}")
-    # return render(request, "user/clinic_form/create_product.html", {"form": form})
+    # return redirect("/users/{request.user}")
+    return render(request, "user/clinic_form/create_product.html", {"form": form})
 
 
 # -------------------------------------  Animals  --------------------------------------------
 
 
-class AnimalCreateView(CreateView):
+def create_animal(request, id):
+    if request.method == "POST":
+        form = AnimalForm(request.POST)
+        if form.is_valid():
+            animal = form.save(commit=False)  # In-memory creation
+            animal.clinic = request.user  # Set user
+            animal.save()  # Commit
+            # it does not do any of there thing but it does create the product
+            # return render(
+            #     request,
+            #     "user_detail.html",
+            #     {"product": product},
+            # )
+            return redirect(f"/users/{request.user.id}")
+    form = AnimalForm()
+    # return redirect("/users/{request.user}")
+    return render(request, "user/clinic_form/create_animal.html", {"form": form})
+
+
+class AnimalListView(ListView):
     model = Animal
-    form_class = AnimalForm
-    success_url = "animal/create"
-    template_name = "user/clinic_form/create_animal.html"
+    template_name = "user/clinic_profile/animal_list.html"
+    context_object_name = "animals"
+    success_url = "/users/{id}/animal/"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.kwargs.get("id"))
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
+
+
+# -------------------------------------  Appointment  --------------------------------------------
+
+
+def create_appointment(request, id):
+    if request.method == "POST":
+        form = AnimalForm(request.POST)
+        if form.is_valid():
+            animal = form.save(commit=False)  # In-memory creation
+            animal.clinic = request.user  # Set user
+            animal.save()  # Commit
+            # it does not do any of there thing but it does create the product
+            # return render(
+            #     request,
+            #     "user_detail.html",
+            #     {"product": product},
+            # )
+            return redirect(f"/users/{request.user.id}")
+    form = AnimalForm()
+    # return redirect("/users/{request.user}")
+    return render(request, "user/clinic_form/create_animal.html", {"form": form})
+
+
+class AppointmentListView(ListView):
+    model = Animal
+    template_name = "user/clinic_profile/animal_list.html"
+    context_object_name = "animals"
+    success_url = "/users/{id}/animal/"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.kwargs.get("id"))
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx

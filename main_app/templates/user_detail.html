@@ -25,7 +25,7 @@ clinic
 <br>
 <div id='profile_chose_block'>
   {% if user_details.clinic %}
-  <form action="" method ='get'>
+  <form action="/users/{{user_details.id}}/animal/" method ='get'>
     {% csrf_token %}
     <button>
       Animal
@@ -38,7 +38,7 @@ clinic
     </button>
   </form>
   {% comment %} <form action="/users/{{user_details.id}}/products/create" method ='post'> {% endcomment %}
-  <form action="/users/{{user_details.id}}/product/create/" method ='post'>
+  <form action="/users/{{user_details.id}}/product/" method ='get'>
     {% csrf_token %}
     <button>
       Products
@@ -69,20 +69,33 @@ clinic
 <br>
 <hr>
 {% block profile_selected_block %}{% endblock profile_selected_block %}
+
+{% if products %}
+<h1>Products</h1>
+{% endif %}
+
+
+{% if appointments %}
+<h1>Appointments</h1>
+{% endif %}
+
+
+{% if animals %}
+<h1>Animals</h1>
+{% endif %}
 {% comment %} ---------------  Products  -------------- {% endcomment %}
   <div id='user_detail_page products'>
-    <form method="post" f"action='/users/{{ user_details.id }}/'">
-    {% comment %} <form method="post"> {% endcomment %}
+    {% comment %} <form method="post" f"action='/users/{{ user_details.id }}/product/create/'">
     {% csrf_token %}
-    {{form.as_p}}
     <button>Create</button>
-</form>
+</form> {% endcomment %}
+{% comment %} <a href="/users/{{user.id}}/product/create/">Create Product</a>
 
   <h1>Clinic Products List</h1>
   {% for product in user_details.clinic_products.all %}
     <h3>{{product.product_name}}</h3>
   {% endfor %}
-</div>
+</div> {% endcomment %}
 
 
 

@@ -37,3 +37,23 @@ class Products(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=True, related_name="ordered_items"
     )
+
+
+class Appointment(models.Model):
+    class Reason(models.TextChoices):
+        R1 = "Shower", "Shower"
+        R2 = "Nail Care", "Nail Care"
+        R3 = "Router Check up", "Router Check up"
+
+    date = models.DateField()
+    time = models.TimeField()
+    reason = models.CharField(choices=Reason.choices, default=Reason.R1)
+    clinic = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, null=False, related_name="clinic"
+    )
+    owner = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, null=True, related_name="owner"
+    )
+    animal = models.ForeignKey(
+        Animal, on_delete=models.CASCADE, null=True, related_name="animal"
+    )

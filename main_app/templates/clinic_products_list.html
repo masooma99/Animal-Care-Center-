@@ -1,8 +1,10 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
 {% block create_product_content %}{% endblock create_product_content %}
+<a href="/users/{{user.id}}/product/create/">Create Product</a>
+<br>
 <h1>Clinic Products List</h1>
-{% for product in Products %}
+{% for product in products %}
 <h3>{{product.product_name}}</h3>
 {% endfor %}
 {% endblock profile_selected_block %}

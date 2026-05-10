@@ -1,4 +1,10 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
-<h1> Clinic Animal List</h1>
+{% block create_product_content %}{% endblock create_product_content %}
+<a href="/users/{{user.id}}/animal/create/">Create Animal</a>
+<br>
+<h1>Clinic Animals:</h1>
+{% for animal in animals %}
+<h3>{{animal.animal_name}}</h3>
+{% endfor %}
 {% endblock profile_selected_block %}
