@@ -1,4 +1,12 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
-<h1> go shopping --- Clinic Appointments List</h1>
+<h1>Clinic Appointments List</h1>
+<ul>
+{% for appointment in appointments %}
+<ul>
+  <li>Appointment reason: {{appointment.reason}}</li>
+  <li>price: {{appointment.price}}</li>
+</ul>
+{% endfor %}
+</ul>
 {% endblock profile_selected_block %}

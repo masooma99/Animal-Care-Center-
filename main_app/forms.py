@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import CustomUser, Animal, Products
+from .models import CustomUser, Animal, Products, Appointment
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -27,3 +27,9 @@ class AnimalForm(forms.ModelForm):
     class Meta:
         model = Animal
         fields = ["animal_name", "age", "image", "type"]
+
+
+class AppointmentForm(forms.ModelForm):
+    class Meta:
+        model = Appointment
+        fields = ["reason", "date", "time", "animal"]

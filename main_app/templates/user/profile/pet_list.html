@@ -1,4 +1,12 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
 <h1> Owner Pets List </h1>
+<ul>
+{% for pet in pets %}
+<li>
+<img src="{{pet.image}}" alt="pet image">
+<p>your {{pet.type}} name is {{pet.animal_name}} and he is {{pet.age}} year old.</p>
+</li>
+{% endfor %}
+</ul>
 {% endblock profile_selected_block %}

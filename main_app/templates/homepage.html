@@ -2,7 +2,8 @@
 {% block content %}
 {% for one_user in users %}
 {% if one_user.clinic %}
-<h1>{{one_user.username}}</h1>{% endif %}
+<a href="/users/{{one_user.id}}">
+<h1>{{one_user.username}}</h1></a>{% endif %}
 
 {% endfor %}
 {% endblock content %}

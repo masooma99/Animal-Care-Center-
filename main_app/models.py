@@ -48,12 +48,35 @@ class Appointment(models.Model):
     date = models.DateField()
     time = models.TimeField()
     reason = models.CharField(choices=Reason.choices, default=Reason.R1)
+    price = models.FloatField()
     clinic = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, null=False, related_name="clinic"
+        CustomUser, on_delete=models.CASCADE, null=False, related_name="appointments"
     )
     owner = models.ForeignKey(
-        CustomUser, on_delete=models.CASCADE, null=True, related_name="owner"
+        CustomUser,
+        on_delete=models.CASCADE,
+        null=False,
+        related_name="appointments_owner",
     )
     animal = models.ForeignKey(
-        Animal, on_delete=models.CASCADE, null=True, related_name="animal"
+        Animal,
+        on_delete=models.CASCADE,
+        null=False,
+        related_name="appointments_for_animal",
+    )
+
+
+class Order(models.Model):
+    total_price = models.IntegerField()
+    product = models.ManyToManyField(
+        Products,
+        # on_delete=models.CASCADE,
+        # null=False,
+        # related_name="ordered_products",
+    )
+    clinic = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, null=False, related_name="clinic_orders"
+    )
+    user = models.ForeignKey(
+        CustomUser, on_delete=models.CASCADE, null=True, related_name="order_list"
     )

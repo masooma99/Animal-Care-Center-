@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .forms import ProductForm, AnimalForm
-from .models import Products, Animal
+from .forms import ProductForm, AnimalForm, AppointmentForm
+from .models import Products, Animal, Appointment, Order
 
 # from .forms import SignUpUserForm, SignInUserForm
 from django.views.generic import (
@@ -39,6 +39,13 @@ class UserDetailView(DetailView):
     template_name = "user_detail.html"
     context_object_name = "user_details"
     pk_url_kwarg = "id"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.kwargs.get("id"))
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
 
 
 # -------------------------------------  home page  --------------------------------------------
@@ -123,33 +130,53 @@ class AnimalListView(ListView):
         return ctx
 
 
+class AnimalDetailView(DetailView):
+    model = Animal
+    template_name = "user/clinic_profile/Animal_detail.html"
+    context_object_name = "animal_details"
+    pk_url_kwarg = "animal_id"
+
+
+def adopt_animal(request, id, animal_id):
+
+    animal_details = Animal.objects.get(id=animal_id)
+    if not animal_details.owner:
+        animal_details.owner = request.user
+        return redirect(f"/users/{request.user.id}/animal")
+    # ctx = super().get_context_data(**kwargs)
+    # ctx["animal_details"] = animal_details
+    # return ctx
+
+
 # -------------------------------------  Appointment  --------------------------------------------
 
 
 def create_appointment(request, id):
     if request.method == "POST":
-        form = AnimalForm(request.POST)
+        form = AppointmentForm(request.POST)
         if form.is_valid():
-            animal = form.save(commit=False)  # In-memory creation
-            animal.clinic = request.user  # Set user
-            animal.save()  # Commit
-            # it does not do any of there thing but it does create the product
-            # return render(
-            #     request,
-            #     "user_detail.html",
-            #     {"product": product},
-            # )
+            appointment = form.save(commit=False)
+            appointment.owner = request.user
+            appointment.clinic = appointment.animal.clinic
+            if appointment.reason == "Shower":
+                appointment.price = 2
+            elif appointment.reason == "Nail Care":
+                appointment.price = 3
+            else:
+                appointment.price = 8
+            appointment.save()
             return redirect(f"/users/{request.user.id}")
-    form = AnimalForm()
-    # return redirect("/users/{request.user}")
-    return render(request, "user/clinic_form/create_animal.html", {"form": form})
+    else:
+        form = AppointmentForm()
+    return render(request, "user/clinic_form/create_appointment.html", {"form": form})
 
 
-class AppointmentListView(ListView):
-    model = Animal
-    template_name = "user/clinic_profile/animal_list.html"
-    context_object_name = "animals"
-    success_url = "/users/{id}/animal/"
+#  clinic appointments
+class ClinicAppointmentListView(ListView):
+    model = Appointment
+    template_name = "user/clinic_profile/clinic_appointments.html"
+    context_object_name = "appointments"
+    success_url = "/users/{id}/appointment/"
 
     def get_context_data(self, **kwargs):
         user_details = CustomUser.objects.get(id=self.kwargs.get("id"))
@@ -157,3 +184,67 @@ class AppointmentListView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx["user_details"] = user_details
         return ctx
+
+
+#  normal user appointments
+class AppointmentListView(ListView):
+    model = Appointment
+    template_name = "user/profile/pet_appointment_list.html"
+    context_object_name = "pet_appointments"
+    success_url = "/users/{id}/appointments/"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.request.user.id)
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
+
+
+class AppointmentListView(ListView):
+    model = Appointment
+    template_name = "user/profile/pet_appointment_list.html"
+    context_object_name = "pet_appointments"
+    success_url = "/users/{id}/appointments/"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.request.user.id)
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
+
+
+class PetListView(ListView):
+    model = Animal
+    template_name = "user/profile/pet_list.html"
+    context_object_name = "pets"
+    success_url = "/users/{id}/pet/"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.request.user.id)
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
+
+
+class OrderListView(ListView):
+    model = Order
+    template_name = "user/profile/order_list.html"
+    context_object_name = "orders"
+    success_url = "/users/{id}/order/"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.request.user.id)
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
+
+
+class productDetailView(DetailView):
+    model = Products
+    template_name = "user/clinic_profile/product_detail.html"
+    context_object_name = "product_details"
+    pk_url_kwarg = "product_id"

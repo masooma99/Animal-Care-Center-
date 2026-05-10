@@ -5,6 +5,7 @@
 <br>
 <h1>Clinic Products List</h1>
 {% for product in products %}
-<h3>{{product.product_name}}</h3>
+<a href="{{product.id}}">{{product.product_name}}</a>
+<br>
 {% endfor %}
 {% endblock profile_selected_block %}

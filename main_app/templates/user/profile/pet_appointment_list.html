@@ -1,4 +1,13 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
-<h1> Owner Appointments List </h1>
+<a href="/users/{{user.id}}/appointment/create/">Get an appointment for your pet</a>
+<h1>pets Appointments List</h1>
+<ul>
+{% for appointment in pet_appointments %}
+<ul>
+  <li>Appointment reason: {{appointment.reason}}</li>
+  <li>price: {{appointment.price}}</li>
+</ul>
+{% endfor %}
+</ul>
 {% endblock profile_selected_block %}
