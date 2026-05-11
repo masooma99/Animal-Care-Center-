@@ -14,7 +14,11 @@ urlpatterns = [
     # ------------------------------- Products ----------
     path("users/<int:id>/product/create/", views.create_product),
     path("users/<int:id>/product/", views.ProductListView.as_view()),
-    path("users/<int:id>/product/<int:product_id>/", views.productDetailView.as_view()),
+    # path("users/<int:id>/product/<int:product_id>/", views.productDetailView.as_view()),
+    path(
+        "users/<int:id>/product/<int:product_id>/",
+        views.ProductDeleteView.as_view(),
+    ),
     # ------------------------------- Animals ----------
     path("users/<int:id>/animal/create/", views.create_animal),
     path("users/<int:id>/animal/", views.AnimalListView.as_view()),
@@ -26,6 +30,7 @@ urlpatterns = [
         "users/<int:id>/appointment/", views.ClinicAppointmentListView.as_view()
     ),  # for both clinic and normal users
     path("users/<int:id>/appointments/", views.AppointmentListView.as_view()),
+    path("users/<int:id>/sync-cart/", views.sync_cart),
     # path("users/<int:id>/pet/", views.PetListView.as_view()),
     path("users/<int:id>/pet/", views.pet_list),
     path("users/<int:id>/order/", views.OrderListView.as_view()),

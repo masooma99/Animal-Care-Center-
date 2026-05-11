@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class CustomUser(AbstractUser):
-    image = models.CharField(max_length=255)
+    image = models.CharField()
     clinic = models.BooleanField(default=False, null=True)
     email = models.EmailField(blank=True)
 
@@ -30,9 +30,9 @@ class Animal(models.Model):
 
 
 class Products(models.Model):
-    product_name = models.CharField()
-    description = models.CharField()
-    image = models.CharField()
+    product_name = models.CharField(max_length=255)
+    description = models.TextField()
+    image = models.TextField(null=True)
     price = models.IntegerField()
     clinic = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=False, related_name="clinic_products"
@@ -40,6 +40,9 @@ class Products(models.Model):
     user = models.ForeignKey(
         CustomUser, on_delete=models.CASCADE, null=True, related_name="ordered_items"
     )
+
+    def __str__(self):
+        return self.product_name
 
 
 class Appointment(models.Model):

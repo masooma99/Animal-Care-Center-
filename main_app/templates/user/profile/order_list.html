@@ -2,10 +2,10 @@
 {% block profile_selected_block %}
 <h1>Order List: </h1>
 <ul>
-{% for order in orders %}
+{% for order in user_details.order_list.all %}
 <ul>
-  <li>Your order from: {{appointment.clinic_orders.username}}</li>
-  <li>Total price: {{appointment.total_price}}</li>
+  <li>Your order from: {{order.clinic.username}} clinic</li>
+  <li>Total price: {{order.total_price}}</li>
 </ul>
 {% endfor %}
 </ul>

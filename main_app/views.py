@@ -61,6 +61,19 @@ class UserListView(ListView):
 # -------------------------------------  Products  --------------------------------------------
 
 
+class ProductDeleteView(DeleteView):
+    model = Products
+    success_url = "/users/{user_id}/"  # should render to the profile page
+    pk_url_kwarg = "product_id"
+
+    def get_context_data(self, **kwargs):
+        user_details = CustomUser.objects.get(id=self.request.user.id)
+
+        ctx = super().get_context_data(**kwargs)
+        ctx["user_details"] = user_details
+        return ctx
+
+
 class ProductListView(ListView):
     model = Products
     template_name = "clinic_products_list.html"
@@ -91,7 +104,32 @@ def create_product(request, id):
     return render(request, "user/clinic_form/create_product.html", {"form": form})
 
 
-# -------------------------------------  Animals  --------------------------------------------
+import json
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+
+
+# to create order
+@require_http_methods(["POST"])
+def sync_cart(request, id):
+    data = json.loads(request.body)
+    items = data.get("items", [])
+    clinic = CustomUser.objects.get(id=id)
+
+    if not items:
+        return JsonResponse({"status": "error", "message": "Cart is empty"}, status=400)
+    total_price = sum(float(item["price"]) * int(item["quantity"]) for item in items)
+    order = Order.objects.create(
+        user=request.user, clinic=clinic, total_price=int(total_price)
+    )
+    for item in items:
+        product = Products.objects.get(id=item["id"])
+        order.product.add(product)
+
+    return redirect(f"/users/{request.user.id}/order/")
+
+
+# -------------------------------------  Animals  --------------------------------------
 
 
 def create_animal(request, id):
@@ -256,13 +294,3 @@ class OrderListView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx["user_details"] = user_details
         return ctx
-
-
-class productDetailView(DetailView):
-    model = Products
-    template_name = "user/clinic_profile/product_detail.html"
-    context_object_name = "product_details"
-    pk_url_kwarg = "product_id"
-
-
-# ===============================  Shopping  =========================================
