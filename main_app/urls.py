@@ -1,4 +1,5 @@
 from django.urls import path
+from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
@@ -25,6 +26,8 @@ urlpatterns = [
         "users/<int:id>/appointment/", views.ClinicAppointmentListView.as_view()
     ),  # for both clinic and normal users
     path("users/<int:id>/appointments/", views.AppointmentListView.as_view()),
-    path("users/<int:id>/pet/", views.PetListView.as_view()),
+    # path("users/<int:id>/pet/", views.PetListView.as_view()),
+    path("users/<int:id>/pet/", views.pet_list),
     path("users/<int:id>/order/", views.OrderListView.as_view()),
+    path("auth/logout", RedirectView.as_view(url="/auth/logout/", permanent=False)),
 ]

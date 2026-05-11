@@ -25,6 +25,9 @@ class Animal(models.Model):
         CustomUser, on_delete=models.CASCADE, null=True, related_name="owned_pets"
     )
 
+    def __str__(self):
+        return self.animal_name
+
 
 class Products(models.Model):
     product_name = models.CharField()

@@ -1,12 +1,13 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
 <h1> Owner Pets List </h1>
-<ul>
+
 {% for pet in pets %}
-<li>
+<a href="/users/{{user.id}}/animal/{{pet.id}}/">
+<div id='pet_list'>
 <img src="{{pet.image}}" alt="pet image">
-<p>your {{pet.type}} name is {{pet.animal_name}} and he is {{pet.age}} year old.</p>
-</li>
+{% comment %} <p>your {{pet.type}} name is {{pet.animal_name}} and he is {{pet.age}} year old.</p> {% endcomment %}
+<h3>{{pet.animal_name}}</h3>
+</div></a>
 {% endfor %}
-</ul>
 {% endblock profile_selected_block %}

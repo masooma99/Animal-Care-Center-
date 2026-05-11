@@ -2,11 +2,12 @@
 {% block content %}
 <img src="{{animal_details.image}}" alt="animal image">
 <h1>{% if animal_details.owner %}
-{{animal_details.owner.username}} animal_details{% else %}This {{animal_details.type}} does not have an owner and his{% endif %} name is {{animal_details.animal_name}}, he'is {{animal_details.age}} years old.
+{{animal_details.owner.username}} is the owner for this {{animal_details.type}} and his  {% else %}This {{animal_details.type}} does not have an owner and his{% endif %} name is {{animal_details.animal_name}}, he'is {{animal_details.age}} years old.
 </h1>
+{% if not animal_details.owner %}
 
 <form action="adopt/">
   {% csrf_token %}
   <button> Adopt </button>
-</form>
+</form>{% endif %}
 {% endblock content %}

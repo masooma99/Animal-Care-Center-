@@ -1,7 +1,9 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
 {% block create_product_content %}{% endblock create_product_content %}
-<a href="/users/{{user.id}}/animal/create/">Create Animal</a>
+{% if user_details.id == user.id %}
+<a href="/users/{{user_details.id}}/animal/create/">Create Animal</a>
+{% endif %}
 <br>
 <h1>Clinic Animals:</h1>
 {% for animal in animals %}

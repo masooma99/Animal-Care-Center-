@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+{% if user.is_authenticated %}
 <form method="post" f"action='/users/{user_details.id}/'">
   {% csrf_token %}
   {{form.as_p}}
   <button>Create</button>
 </form>
+{% endif %}
 {% endblock content %}

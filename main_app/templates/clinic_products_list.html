@@ -1,11 +1,39 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
 {% block create_product_content %}{% endblock create_product_content %}
-<a href="/users/{{user.id}}/product/create/">Create Product</a>
+
+{% if user_details.id == user.id %}
+  <a href="/users/{{user_details.id}}/product/create/">Create Product</a>
+{% endif %}
+
+<a href="#">
+  <img src="https://cdn-icons-png.flaticon.com/128/3144/3144456.png" alt="cart" id='cart_icon'>
+</a>
+<a href="/users/{{user_details.id}}/order/create/">create order</a>
+
+
 <br>
 <h1>Clinic Products List</h1>
 {% for product in products %}
-<a href="{{product.id}}">{{product.product_name}}</a>
+{% comment %} <a href="{{product.id}}">{{product.product_name}}</a> {% endcomment %}
+<div id='product_list_details'>
+  {% if product.image %}
+  <img src="{{product.image}}" alt="product image" id='product_image'>
+  {% else %}
+  <img src="https://cdn-icons-png.flaticon.com/128/3081/3081648.png" alt="product has no image">
+  {% endif %}
+  <div>
+<h3 id='name-{{product.id}}'>{{product.product_name}}</h3>
+<p id='description-{{product.id}}'>Description: {{product.description}}</p>
+<h5 id='price-{{product.id}}'>Price: {{product.price}}</h5>
+</div>
+
+  <form method="post" action="">
+    {% csrf_token %}
+    <button class='add_to_cart_button' data-product-id="{{product.id}}" data-name="{{product.product_name}}" data-price="{{product.price}}" type='submit'>Add to cart</button>
+  </form>
+
+</div>
 <br>
 {% endfor %}
 {% endblock profile_selected_block %}
