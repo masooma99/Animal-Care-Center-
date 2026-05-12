@@ -4,12 +4,33 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animal Care Center</title>
+  <style>
+    header{
+      display: flex;
+      gap:20px
+    }
+  </style>
   {% block head %}{% endblock head %}
 
 </head>
 <body>
 <header>
-  <a href="/users/">Home Page</a> | <a href="/users/{{user.id}}/">Profile</a> | <a href="/auth/logout/">Sign Out</a>
+  {% if user.is_authenticated  %}
+  <a href="/users/">Home Page</a> | <a href="/users/{{user.id}}/">Profile</a> |
+  <form method='post' action="/auth/logout/">
+    {% csrf_token %}
+    <button>Sign Out</button>
+  </form>
+  {% else %}
+  <form method='post' action="/auth/login/">
+    {% csrf_token %}
+    <button>Sign In</button>
+  </form>
+  <form method='post' action="/auth/sign-up/">
+    {% csrf_token %}
+    <button>Sign Up</button>
+  </form>
+  {% endif %}
 
   {% comment %} <nav>
     {% if user.is_authenticated %}

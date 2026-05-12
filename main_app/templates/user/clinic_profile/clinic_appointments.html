@@ -3,7 +3,7 @@
 <a href="/users/{{user_details.id}}/appointment/create/">Get an appointment</a>
 <h1>Clinic Appointments List</h1>
 <ul>
-{% for appointment in appointments %}
+{% for appointment in user_details.appointments.all %}
 <ul>
   <li>Appointment reason: {{appointment.reason}}</li>
   <li>price: {{appointment.price}}</li>

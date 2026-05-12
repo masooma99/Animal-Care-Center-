@@ -1,12 +1,14 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
-<h1>pets Appointments List</h1>
+<div id='pets_appointments_list'>
+<h1>Pets Appointments List</h1>
 <ul>
-{% for appointment in pet_appointments %}
-<ul>
+{% for appointment in user_details.appointments_owner.all %}
+<ul id='pets_appointments_list_ul'>
   <li>Appointment reason: {{appointment.reason}}</li>
   <li>price: {{appointment.price}}</li>
 </ul>
 {% endfor %}
 </ul>
+</div>
 {% endblock profile_selected_block %}

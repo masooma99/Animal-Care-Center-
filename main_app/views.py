@@ -63,7 +63,7 @@ class UserListView(ListView):
 
 class ProductDeleteView(DeleteView):
     model = Products
-    success_url = "/users/{user_id}/"  # should render to the profile page
+    # success_url = "/users/{user_id}/"  # should render to the profile page
     pk_url_kwarg = "product_id"
 
     def get_context_data(self, **kwargs):
@@ -72,6 +72,9 @@ class ProductDeleteView(DeleteView):
         ctx = super().get_context_data(**kwargs)
         ctx["user_details"] = user_details
         return ctx
+
+    def get_success_url(self):
+        return f"/users/{self.kwargs.get('id')}"
 
 
 class ProductListView(ListView):
@@ -86,6 +89,9 @@ class ProductListView(ListView):
         ctx = super().get_context_data(**kwargs)
         ctx["user_details"] = user_details
         return ctx
+
+    def get_queryset(self):
+        return Products.objects.filter(clinic=self.request.user)
 
 
 def create_product(request, id):
@@ -115,9 +121,6 @@ def sync_cart(request, id):
     data = json.loads(request.body)
     items = data.get("items", [])
     clinic = CustomUser.objects.get(id=id)
-
-    if not items:
-        return JsonResponse({"status": "error", "message": "Cart is empty"}, status=400)
     total_price = sum(float(item["price"]) * int(item["quantity"]) for item in items)
     order = Order.objects.create(
         user=request.user, clinic=clinic, total_price=int(total_price)
@@ -190,6 +193,8 @@ def adopt_animal(request, id, animal_id):
 
 
 def create_appointment(request, id):
+    # if id != request.user.id:
+    #     return redirect("/")
     clinic_user = CustomUser.objects.get(id=id)
     if request.method == "POST":
         form = AppointmentForm(request.POST)
@@ -214,12 +219,15 @@ def create_appointment(request, id):
 
 #  clinic appointments
 class ClinicAppointmentListView(ListView):
+
     model = Appointment
     template_name = "user/clinic_profile/clinic_appointments.html"
     context_object_name = "appointments"
     success_url = "/users/{id}/appointment/"
 
     def get_context_data(self, **kwargs):
+        # if id != self.request.user.id:
+        #     return render(self.request, "intro_page.html")
         user_details = CustomUser.objects.get(id=self.kwargs.get("id"))
 
         ctx = super().get_context_data(**kwargs)
@@ -250,6 +258,9 @@ class AppointmentListView(ListView):
 
     def get_context_data(self, **kwargs):
         user_details = CustomUser.objects.get(id=self.request.user.id)
+
+        # def get_queryset(self):
+        #     return Products.objects.filter(owner=self.get_context_data)
 
         ctx = super().get_context_data(**kwargs)
         ctx["user_details"] = user_details

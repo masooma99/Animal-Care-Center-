@@ -87,7 +87,7 @@ const toggleCartView = (event) => {
 
 const makeOrder = async () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || []
-  
+
   if (cart.length === 0) {
     alert("Cart is empty")
     return
@@ -96,14 +96,15 @@ const makeOrder = async () => {
   try {
     // Get clinic ID from URL
     const clinicId = window.location.pathname.split("/")[2]
-    
+
     const response = await fetch(`/users/${clinicId}/sync-cart/`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]").value
+        "X-CSRFToken": document.querySelector("[name=csrfmiddlewaretoken]")
+          .value,
       },
-      body: JSON.stringify({ items: cart })
+      body: JSON.stringify({ items: cart }),
     })
 
     if (response.ok) {
