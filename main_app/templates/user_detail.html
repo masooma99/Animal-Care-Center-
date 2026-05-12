@@ -75,6 +75,15 @@
   border-radius: 10px;
   text-decoration: none;
 }
+#button_style{
+  background-image: url({% static "images/button_background.png" %});
+    background-size: cover;
+    background-position: center;
+    color: white; /* Ensures text is visible */
+    border: none;
+    padding: 20px 40px;
+    cursor: pointer;
+}
 </style>
 {% endblock head %}
 {% block content %}
@@ -111,7 +120,7 @@ clinic
   {% else %}
   <form action="/users/{{user_details.id}}/pet/" method ='get'>
     {% csrf_token %}
-    <button>
+    <button id='button_style'>
       Pets
     </button>
   </form>
