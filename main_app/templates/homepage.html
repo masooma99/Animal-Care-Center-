@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
+<div id='big-div_home'>
+
+<div id='pets_appointments_list'>
 {% for one_user in users %}
 {% if one_user.clinic %}
 <a href="/users/{{one_user.id}}">
 <h1>{{one_user.username}}</h1></a>{% endif %}
 
-{% endfor %}
+{% endfor %}</div></div>
 {% endblock content %}

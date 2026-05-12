@@ -1,12 +1,17 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
+<div id='pets_appointments_list'>
 <h1>Order List: </h1>
-<ul>
+<ul >
 {% for order in user_details.order_list.all %}
 <ul>
   <li>Your order from: {{order.clinic.username}} clinic</li>
   <li>Total price: {{order.total_price}}</li>
 </ul>
+<br>
+<hr>
+<br>
 {% endfor %}
 </ul>
+</div>
 {% endblock profile_selected_block %}

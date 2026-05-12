@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,10 +6,84 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Animal Care Center</title>
   <style>
+    body{
+    background-color: rgb(245, 216, 220);
+    background-image: url({% static "images/background2.png" %});
+    {% comment %} background-image: url("static/images/background2.png"); {% endcomment %}
+    background-size: contain;
+    background-repeat: no-repeat;
+    cursor: pointer;
+    padding:20px;
+    font-family: "Lucida Handwriting", cursive;
+  }
     header{
       display: flex;
-      gap:20px
+      gap:20px;
+      justify-content: center;
     }
+  #link-button {
+    /* Reset button styles */
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    /* Add link styles */
+    color: blue; /* Match your site's link color */
+    text-decoration: underline;
+    font-family: "Lucida Handwriting", cursive;
+}
+#button_style{
+  background-image: url({% static "images/button.png" %});
+  background-color:rgb(245, 216, 220);
+    background-size: contain;
+    background-position: center;
+    color: black;
+    border: none;
+    background-repeat: no-repeat;
+    padding: 20px 40px;
+    {% comment %} cursor: pointer; {% endcomment %}
+    width: 150px;
+}
+#animal_details{
+  width: 70%;
+  background-color:beige;
+  display: flex;
+  border: 1px solid grey;
+  border-radius: 10px;
+  align-items: center;
+  justify-content:center;
+  flex-direction:column;
+  padding: 20px
+}
+
+#big-div{
+  display:flex;
+  flex-direction:column;
+  height: 100vh;
+  justify-content:center;
+  align-items: center;
+}
+#big-div_home{
+  display:flex;
+  flex-direction:column;
+  height: 100vh;
+  justify-content:center;
+}
+#pets_appointments_list{
+  background-color:beige;
+  border: 1px solid grey;
+  padding: 20px;
+  margin-left: 30px;
+  margin-right: 30px;
+  border-radius: 10px;
+}
+hr{
+  margin: 1px;
+}
   </style>
   {% block head %}{% endblock head %}
 
@@ -19,7 +94,7 @@
   <a href="/users/">Home Page</a> | <a href="/users/{{user.id}}/">Profile</a> |
   <form method='post' action="/auth/logout/">
     {% csrf_token %}
-    <button>Sign Out</button>
+    <button id='link-button'>Sign Out</button>
   </form>
   {% else %}
   <form method='post' action="/auth/login/">

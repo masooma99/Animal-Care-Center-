@@ -1,6 +1,8 @@
 {% extends "user_detail.html" %}
 {% block profile_selected_block %}
 <a href="/users/{{user_details.id}}/appointment/create/">Get an appointment</a>
+<br>
+<div id='pets_appointments_list'>
 <h1>Clinic Appointments List</h1>
 <ul>
 {% for appointment in user_details.appointments.all %}
@@ -10,4 +12,5 @@
 </ul>
 {% endfor %}
 </ul>
+</div>
 {% endblock profile_selected_block %}

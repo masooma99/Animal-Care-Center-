@@ -1,6 +1,8 @@
 body {
   background-color: beige;
+  /* background-size: contain; */
 }
+
 /* #product_list_details {
   border: 1px solid grey;
   padding: 20px;

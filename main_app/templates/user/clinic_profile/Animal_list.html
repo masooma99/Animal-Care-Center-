@@ -5,9 +5,11 @@
 <a href="/users/{{user_details.id}}/animal/create/">Create Animal</a>
 {% endif %}
 <br>
+<div id='pets_appointments_list'>
 <h1>Clinic Animals:</h1>
 {% for animal in user_details.clinic_animals.all %}
 <a href="{{animal.id}}/">
 <h3>{{animal.animal_name}}</h3></a>
 {% endfor %}
+</div>
 {% endblock profile_selected_block %}

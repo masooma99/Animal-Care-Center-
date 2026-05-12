@@ -3,33 +3,15 @@
 {% block head %}
 <script defer src='{% static "js/shopping.js" %}'></script>
 <style>
-  body{
-    background-color: rgb(245, 216, 220);
-    background-image: url({% static "images/background2.png" %});
-    background-size: contain;
-    background-repeat: no-repeat;
-    cursor: pointer;
-  }
   #user_profile_details{
     display: flex;
     gap: 50px;
     padding: 20px;
   }
-  #user_profile_details img{
-    width: 150px;
-  }
+
   #profile_chose_block{
     display: flex;
   justify-content: space-around;
-  }
-  #pet_list{
-    color:black;
-    display:flex;
-    justify-content:flex-start;
-    gap:40px;
-    padding:20px;
-    align-items: center;
-    text-decoration: none;
   }
   #cart_icon{
     width: 30px;
@@ -59,18 +41,18 @@
   margin-left: 30px;
   margin-right: 30px;
 }
-#pets_appointments_list{
-  background-color:beige;
-  border: 1px solid grey;
-  padding: 20px;
-  margin-left: 30px;
-  margin-right: 30px;
-  border-radius: 10px;
-}
+
 #pets_appointments_list_ul{
   padding: 20px;
 }
-#pet_list_all{
+#pet_list{
+  color:black;
+    display:flex;
+    justify-content:flex-start;
+    gap:40px;
+    padding:20px;
+    align-items: center;
+    text-decoration: none;
   background-color:beige;
   border: 1px solid grey;
   padding: 20px;
@@ -79,29 +61,38 @@
   border-radius: 10px;
   text-decoration: none;
 }
-#button_style{
-  background-image: url({% static "images/button.png" %});
-  background-color:rgb(245, 216, 220);
-    background-size: contain;
-    background-position: center;
-    color: black; /* Ensures text is visible */
-    border: none;
-    background-repeat: no-repeat;
-    padding: 20px 40px;
-    cursor: pointer;
-    width: 150px;
+
+#profile_image {
+  border-radius: 50%;
+  border:1px solid grey;
+  width: 90;
+  height: 90px;
+}
+#order_list{
+  background-color:beige;
+  border: 1px solid grey;
+  padding: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+#user_details_big_div{
+  display:flex;
+  flex-direction:column;
+  height: 100vh;
 }
 </style>
 {% endblock head %}
 {% block content %}
+<div id='user_details_big_div'>
 <div id='user_profile_details'>
-  <img src="{{user_details.image}}" alt="User Profile Image">
+  <img src="{{user_details.image}}" alt="User Profile Image" id='profile_image'>
 <h1>{{user_details.username}}{% if user_details.clinic %}
 clinic
 {% endif %}</h1>
 </div>
-<hr>
 <br>
+<hr>
 <br>
 <div id='profile_chose_block'>
   {% if user_details.clinic %}
@@ -145,9 +136,7 @@ clinic
   </form>
 {% endif %}
 </div>
-<br>
-<br>
-<hr>
+
 <br>
 {% block profile_selected_block %}{% endblock profile_selected_block %}
 
@@ -167,5 +156,5 @@ clinic
 
 {% if order %}
 {% endif %}
-
+</div>
 {% endblock content %}
