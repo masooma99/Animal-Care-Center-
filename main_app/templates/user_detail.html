@@ -76,13 +76,16 @@
   text-decoration: none;
 }
 #button_style{
-  background-image: url({% static "images/button_background.png" %});
-    background-size: cover;
+  background-image: url({% static "images/button.png" %});
+  background-color:rgb(245, 216, 220);
+    background-size: contain;
     background-position: center;
-    color: white; /* Ensures text is visible */
+    color: black; /* Ensures text is visible */
     border: none;
+    background-repeat: no-repeat;
     padding: 20px 40px;
     cursor: pointer;
+    width: 150px;
 }
 </style>
 {% endblock head %}
@@ -100,20 +103,20 @@ clinic
   {% if user_details.clinic %}
   <form action="/users/{{user_details.id}}/animal/" method ='get'>
     {% csrf_token %}
-    <button>
+    <button id='button_style'>
       Animal
     </button>
   </form>
   <form action="/users/{{user_details.id}}/appointment/" method ='get'>
     {% csrf_token %}
-    <button>
+    <button id='button_style'>
       Appointments
     </button>
   </form>
   {% comment %} <form action="/users/{{user_details.id}}/products/create" method ='post'> {% endcomment %}
   <form action="/users/{{user_details.id}}/product/" method ='get'>
     {% csrf_token %}
-    <button>
+    <button id='button_style'>
       Products
     </button>
   </form>
@@ -126,13 +129,13 @@ clinic
   </form>
   <form action="/users/{{user_details.id}}/appointments/" method ='get'>
     {% csrf_token %}
-    <button>
+    <button id='button_style'>
       Appointments
     </button>
   </form>
   <form action="/users/{{user_details.id}}/order/" method ='get'>
     {% csrf_token %}
-    <button>
+    <button id='button_style'>
       Orders
     </button>
   </form>
