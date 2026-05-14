@@ -5,7 +5,8 @@ from django.contrib.auth.models import AbstractUser
 class CustomUser(AbstractUser):
     image = models.CharField()
     clinic = models.BooleanField(default=False, null=True)
-    email = models.EmailField(blank=True)
+    email = models.EmailField(null=False)
+    # models.EmailField(null=False)
 
 
 class Animal(models.Model):
@@ -41,8 +42,21 @@ class Products(models.Model):
         CustomUser, on_delete=models.CASCADE, null=True, related_name="ordered_items"
     )
 
-    def __str__(self):
-        return self.product_name
+
+# class Cart(models.Model):
+#     total_price = models.IntegerField()
+#     products = models.ForeignKey(
+#         Products, on_delete=models.CASCADE, null=False, related_name="cart_products"
+#     )
+#     clinic = models.ForeignKey(
+#         CustomUser, on_delete=models.CASCADE, null=False, related_name="clinic_products"
+#     )
+#     user = models.ForeignKey(
+#         CustomUser, on_delete=models.CASCADE, null=True, related_name="ordered_items"
+#     )
+
+#     def __str__(self):
+#         return self.total_price
 
 
 class Appointment(models.Model):

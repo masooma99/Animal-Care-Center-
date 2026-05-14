@@ -4,16 +4,16 @@ from .models import CustomUser, Animal, Products, Appointment
 
 
 class CustomUserCreationForm(UserCreationForm):
-    email = forms.EmailField(required=True)
-    image = forms.CharField()  # (max_length=255)
-    clinic = forms.BooleanField()  # (default=False)
+    image = forms.CharField()
+    clinic = forms.BooleanField(required=False, initial=False)
+    email = forms.EmailField()
 
     class Meta(UserCreationForm.Meta):
         model = CustomUser
         fields = UserCreationForm.Meta.fields + (
-            "email",
             "image",
             "clinic",
+            "email",
         )
 
 

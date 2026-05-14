@@ -5,10 +5,14 @@
 
 
 {% block content %}
+<div id='big-div_home'>
+
+<div id='pets_appointments_list'>
 <h1>Sign Up</h1>
 <form method='post'>
   {% csrf_token %}
   {{form.as_p}}
   <button>Sign Up</button>
 </form>
+</div></div>
 {% endblock content %}

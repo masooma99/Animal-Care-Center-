@@ -5,6 +5,9 @@
 
 
 {% block content %}
+<div id='big-div_home'>
+
+<div id='pets_appointments_list'>
   <h1>Login</h1>
   <form method="post">
     {% csrf_token %}
@@ -14,4 +17,5 @@
     <a href="/auth/sign-up">Register</a>
 
   </form>
+</div></div>
 {% endblock content %}

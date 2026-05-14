@@ -30,7 +30,7 @@ from .models import CustomUser
 class SignUpView(CreateView):  # (CreateView):
     template_name = "registration/sign-up.html"
     form_class = CustomUserCreationForm
-    success_url = "/auth/login"  # or your home
+    success_url = "/auth/login/"
 
 
 # -------------------------------------  profile page  --------------------------------------------

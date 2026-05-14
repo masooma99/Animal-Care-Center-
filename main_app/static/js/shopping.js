@@ -9,6 +9,7 @@ const cartButton = document.getElementById("cart_icon") //when clicking on this 
 
 const renderCart = () => {
   const cart = JSON.parse(localStorage.getItem("cart")) || []
+  console.log(cart)
   let cartHTML = "<h3>Shopping Cart</h3>"
 
   if (cart.length === 0) {
@@ -64,13 +65,13 @@ add_to_cart_buttons.forEach((button) => {
 
 const removeFromCart = (productId) => {
   let cart = JSON.parse(localStorage.getItem("cart"))
+  console.log(cart)
   // filter to check wich item we want to delete
   cart = cart.filter((item) => item.id !== productId)
   localStorage.setItem("cart", JSON.stringify(cart))
   renderCart()
 }
 
-// Omer did this
 let cartShown = false
 
 const toggleCartView = (event) => {
